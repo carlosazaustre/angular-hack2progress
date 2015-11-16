@@ -4,7 +4,7 @@
   "description": "Angular workshop for Hack2Progress",
   "main": "index.js",
   "scripts": {
-    "start": "http-server src"
+    "start": "http-server ./app"
   },
   "author": "Carlos Azaustre <cazaustre@gmail.com> (https://carlosazaustre.es/blog)",
   "license": "MIT",
