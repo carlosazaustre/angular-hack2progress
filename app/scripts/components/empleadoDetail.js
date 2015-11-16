@@ -11,9 +11,9 @@ function empleadoDetail () {
       this.empleado = {};
 
       DataService.getEmpleado($routeParams.id)
-        .then(function(data) {
+        .then((data) => {
           this.empleado = data;
-        }.bind(this));
+        });
     },
     controllerAs: 'vm',
 

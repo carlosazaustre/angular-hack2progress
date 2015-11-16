@@ -10,19 +10,19 @@ function empleadoList (DataService) {
       this.empleados = [];
 
       DataService.getAll()
-        .then(function(data) {
+        .then((data) => {
           this.empleados = data;
-        }.bind(this));
+        });
     },
 
     controllerAs: 'vm',
 
-    template: [
-      '<div ng-repeat="empleado in vm.empleados">',
-        '<empleado-item data="empleado">',
-        '</empleado-item>',
-      '</div>'
-    ].join('')
+    template: `
+      <div ng-repeat="empleado in vm.empleados">
+        <empleado-item data="empleado">
+        </empleado-item>
+      </div>'
+    `
   }
 
 }
