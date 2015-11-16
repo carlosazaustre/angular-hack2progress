@@ -28914,16 +28914,128 @@ var _angular = require('angular');
 
 var _angular2 = _interopRequireDefault(_angular);
 
+var _employeeList = require('./components/employeeList');
+
+var _employeeList2 = _interopRequireDefault(_employeeList);
+
+var _employeeItem = require('./components/employeeItem');
+
+var _employeeItem2 = _interopRequireDefault(_employeeItem);
+
+var _dataservice = require('./dataservice');
+
+var _dataservice2 = _interopRequireDefault(_dataservice);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_angular2.default.module('myApp', []).controller('MiController', MiController);
-
-function MiController() {
-  this.mensaje = "Hola que tal?";
-}
+_angular2.default.module('myApp', []).directive('employeeList', _employeeList2.default).directive('employeeItem', _employeeItem2.default).service('DataService', _dataservice2.default);
 
 _angular2.default.element(document).ready(function () {
   _angular2.default.bootstrap(document, ['myApp']);
 });
 
-},{"angular":2}]},{},[3]);
+},{"./components/employeeItem":4,"./components/employeeList":5,"./dataservice":6,"angular":2}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = employeeItem;
+function employeeItem() {
+  return {
+    scope: {
+      data: "="
+    },
+    template: "\n      <li class=\"collection-item avatar\">\n        <img class=\"circle\" ng-src=\"{{ data.pic }}\"/>\n        <span class=\"title\">\n          <a ng-href=\"#/employee/{{ data.id }}\">{{ data.fullName }}</a>\n        </span>\n        <p>\n          {{ data.title }}<br/>\n          <span class=\"badge\">{{ data.department }}</span>\n        </p>\n      </li>\n    "
+  };
+}
+
+},{}],5:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = employeeList;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EmployeeListController = (function () {
+  function EmployeeListController(DataService) {
+    _classCallCheck(this, EmployeeListController);
+
+    this.DataService = DataService;
+    this.employees = [];
+    this.getEmployees();
+  }
+
+  _createClass(EmployeeListController, [{
+    key: 'getEmployees',
+    value: function getEmployees() {
+      var _this = this;
+
+      this.DataService.getAll().then(function (data) {
+        _this.employees = data;
+      });
+    }
+  }]);
+
+  return EmployeeListController;
+})();
+
+function employeeList() {
+  return {
+    scope: {},
+    bindToController: true,
+    controller: EmployeeListController,
+    controllerAs: 'vm',
+    template: '\n      <ul class="collection">\n        <employee-item ng-repeat="employee in vm.employees" data="employee">\n        </employee-item>\n      </ul>\n    '
+  };
+}
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var DataService = (function () {
+  function DataService($http) {
+    _classCallCheck(this, DataService);
+
+    this.$http = $http;
+  }
+
+  _createClass(DataService, [{
+    key: 'getAll',
+    value: function getAll() {
+      return this.$http.get('https://empleados-api.herokuapp.com/empleados').then(function (response) {
+        return response.data;
+      }).catch(function (err) {
+        return err;
+      });
+    }
+  }, {
+    key: 'getEmployee',
+    value: function getEmployee(id) {
+      return this.$http.get('https://empleados-api.herokuapp.com/empleados/' + id).then(function (response) {
+        return response.data;
+      }).catch(function (err) {
+        return err;
+      });
+    }
+  }]);
+
+  return DataService;
+})();
+
+exports.default = DataService;
+
+},{}]},{},[3]);
