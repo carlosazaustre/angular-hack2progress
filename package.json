@@ -1,0 +1,29 @@
+{
+  "name": "angular-hack2progress",
+  "version": "1.0.0",
+  "description": "Angular workshop for Hack2Progress",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server src"
+  },
+  "author": "Carlos Azaustre <cazaustre@gmail.com> (https://carlosazaustre.es/blog)",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.4.7",
+    "angular-route": "^1.4.7"
+  },
+  "devDependencies": {
+    "babel": "^6.1.18",
+    "babel-core": "^6.1.21",
+    "babel-preset-es2015": "^6.1.18",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7",
+    "gulp-webserver": "^0.9.1",
+    "http-server": "^0.8.5",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.1"
+  }
+}
