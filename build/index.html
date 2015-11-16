@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <title>AngularJS Workshop</title>
 </head>
-<body>
+<body ng-app="myApp">
+  
+  <div ng-controller="MiController as ctrl">
+    {{ ctrl.mensaje }}
+  </div>
 
+  <script src="app.js"></script>
 </body>
 </html>
